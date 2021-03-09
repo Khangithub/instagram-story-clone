@@ -15,7 +15,10 @@ const storyReducer = (state = initialState, action) => {
       ) {
         return {
           ...state,
-          mainStoryIndex: state.mainStoryIndex + 1,
+          mainStoryIndex:
+            state.mainStoryIndex + 1 > storiesDB.length - 1
+              ? storiesDB.length - 1
+              : state.mainStoryIndex + 1,
           subStoryIndex: 0,
         };
       } else {
@@ -29,9 +32,12 @@ const storyReducer = (state = initialState, action) => {
       if (state.subStoryIndex <= 0) {
         return {
           ...state,
-          mainStoryIndex: state.mainStoryIndex - 1,
+          mainStoryIndex:
+            state.mainStoryIndex - 1 < 0 ? 0 : state.mainStoryIndex - 1,
           subStoryIndex:
-            storiesDB[state.mainStoryIndex - 1].mediaList.length - 1,
+            state.mainStoryIndex - 1 < 0
+              ? 0
+              : storiesDB[state.mainStoryIndex - 1].mediaList.length - 1,
         };
       } else {
         return {

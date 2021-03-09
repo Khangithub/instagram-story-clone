@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import storiesDB from '../storiesDB';
 import StoriesHeader from '../components/StoriesHeader';
 import {useSelector, useDispatch} from 'react-redux';
@@ -9,7 +9,8 @@ function Stories() {
   const mainStoryIndex = useSelector((state) => state.mainStoryIndex);
   const subStoryIndex = useSelector((state) => state.subStoryIndex);
   const dispatch = useDispatch();
-
+  const [imgNextStory, setImgNextStory] = useState(null);
+  
   useEffect(() => {
     const progressList = Array.from(document.querySelectorAll('.progress'));
 
@@ -38,7 +39,14 @@ function Stories() {
     <div className="stories">
       <StoriesHeader />
       <div>
-        <button onClick={() => dispatch(preStory())}>◀ </button>
+        <button
+          onClick={() => {
+            clearTimeout(imgNextStory);
+            dispatch(preStory());
+          }}
+        >
+          ◀
+        </button>
 
         <div className="story__container">
           <div>
@@ -67,12 +75,25 @@ function Stories() {
             {storiesDB[mainStoryIndex].mediaList[subStoryIndex].type ===
             'image' ? (
               <img
+                id="img"
                 src={storiesDB[mainStoryIndex].mediaList[subStoryIndex].url}
                 alt=""
                 style={{
                   objectFit: 'contain',
                   display: 'flex',
                   width: '100%',
+                }}
+                onLoad={() => {
+                  var image = document.getElementById('img');
+                  var isLoaded = image.complete && image.naturalHeight !== 0;
+                  if (isLoaded) {
+                    console.log('loaded', mainStoryIndex, subStoryIndex);
+                    setImgNextStory(
+                      setTimeout(() => {
+                        dispatch(nextStory());
+                      }, 5000)
+                    );
+                  }
                 }}
               />
             ) : (
@@ -89,7 +110,13 @@ function Stories() {
             )}
           </div>
         </div>
-        <button id="nextStoryBtn" onClick={() => dispatch(nextStory())}>
+        <button
+          id="nextStoryBtn"
+          onClick={() => {
+            clearTimeout(imgNextStory);
+            dispatch(nextStory());
+          }}
+        >
           ▶
         </button>
       </div>
