@@ -1,0 +1,14 @@
+.stories__header {
+  display: flex;
+  flex: 1;
+  width: 100%;
+}
+
+.stories__header div img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 2px solid black;
+  padding: 2px;
+  margin: 5px;
+}
