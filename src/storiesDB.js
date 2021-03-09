@@ -32,7 +32,7 @@ const stories = [
       {
         type: 'video',
         url:
-          'https://firebasestorage.googleapis.com/v0/b/instagram-clone-86a6e.appspot.com/o/instagram%2FT%C6%B0%E1%BB%A3ng%20%C4%90%C3%A0i%20Esports%20_%20_Th%C3%A1nh%20k%C3%A9o_%20-%20Madlife.mp4?alt=media&token=0e33fdc7-f9c3-4900-bde7-d7ed63515aaf',
+          'https://firebasestorage.googleapis.com/v0/b/instagram-clone-86a6e.appspot.com/o/instagram%2FT%C6%B0%E1%BB%A3ng%20%C4%90%C3%A0i%20Esports%20_%20_Th%C3%A1nh%20k%C3%A9o_%20-%20Madlife.mp4?alt=media&token=19be25b1-9e40-4ccc-a3ae-28b9fe7dbe61',
         duration: 907,
         isWatched: false,
       },
